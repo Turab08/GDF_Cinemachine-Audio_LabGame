@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -8,6 +6,9 @@ public class PlayerMovement : MonoBehaviour
     public float speed;
     public float jumpForce;
     public bool isGrounded;
+
+    [SerializeField] AudioSource source;
+    [SerializeField] AudioClip jumpSFX;
 
     void Awake()
     {
@@ -29,5 +30,8 @@ public class PlayerMovement : MonoBehaviour
     void Jump()
     {
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        if (source != null) {
+            source.PlayOneShot(jumpSFX);
+        }
     }
 }
